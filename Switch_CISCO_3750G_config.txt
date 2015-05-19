@@ -1,0 +1,370 @@
+
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname Switch
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$MF7I$vn2Vk2j7CcfKrKYlZuO9c0
+enable password 7 1404051B0D
+!
+username swpa privilege 15 password 7 0518031D22434304
+username Aaron_Lin privilege 15 password 7 01435755095D
+no aaa new-model
+switch 3 provision ws-c3750x-48p
+system mtu routing 1500
+!
+!
+!
+ip dhcp snooping
+vtp mode transparent
+!
+!
+crypto pki trustpoint TP-self-signed-1290163712
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1290163712
+ revocation-check none
+ rsakeypair TP-self-signed-1290163712
+!
+!
+crypto pki certificate chain TP-self-signed-1290163712
+ certificate self-signed 01
+  3082023E 308201A7 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31323930 31363337 3132301E 170D3933 30333031 30303031 
+  32385A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 32393031 
+  36333731 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100B045 8DBFEED8 7DF93ADB 0C731DD6 EE0CA727 71E445FC BCE1EAC6 B7CFE19A 
+  7849E0AA AC121396 01D15D31 0AB6C24D ECE502B2 B0C4D930 D2EBEA58 1B75E7FF 
+  568757F9 DE59C2B3 578EACAF F581802C 3BBC69FC 95EC5960 845E6AAB 6A3496A3 
+  8620CB53 D0DB588E 66B78D9C 87494276 3535258F 0BD54364 35689D3B 4FD58BBE 
+  6AAD0203 010001A3 66306430 0F060355 1D130101 FF040530 030101FF 30110603 
+  551D1104 0A300882 06537769 74636830 1F060355 1D230418 30168014 B5C619C8 
+  3FE9A0A7 EACEF3AE E0D31E15 AC611BE8 301D0603 551D0E04 160414B5 C619C83F 
+  E9A0A7EA CEF3AEE0 D31E15AC 611BE830 0D06092A 864886F7 0D010104 05000381 
+  8100590A 37E05848 8C8F8761 010E4404 1DF5DE6E 35000531 38680173 0F545A73 
+  B45055CE 1D320578 03A549C4 BE159ADC F1FDEDC0 5433ADF1 621E522F F8ACB014 
+  EE608375 20A1EB4E 5D7B0B85 5B76C4B5 A7A49A12 625A5633 1C0D7AA5 A717B4B0 
+  B717E33B DDB1A21F 92B4D738 B5C9C424 1FB8672C F2D73AD3 22384A41 58181EF6 7485
+  	quit
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree portfast default
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 88
+ name DHCP_192.168.8.x
+!
+vlan 100
+ name DHCP_172.19.100.X
+!
+vlan 169
+ name for_control_network
+!
+vlan 200
+ name DHCP_172.19.200.X
+!
+vlan 1111
+ name DHCP_11.11.X.X
+!
+!
+bridge irb
+!
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+!
+interface GigabitEthernet3/0/1
+ description C602
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/2
+ description C603
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/3
+ description C604
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/4
+ description C606
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/5
+ description C607
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/6
+ description C608
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/7
+ description C610
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/8
+ description C611
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/9
+ description C612
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/10
+ description C614
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/11
+ description C615
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/12
+ description C616
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/13
+ description C618
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/14
+ description C619
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/15
+ description C620
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/16
+ description C622
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/17
+ description C623
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/18
+ description C624
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/19
+ description C626
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/20
+ description C627
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/21
+ description C628
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/22
+ description C630
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/23
+ description C631
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/24
+ description C632
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/25
+ description C633
+ switchport access vlan 100
+ switchport mode access
+!
+interface GigabitEthernet3/0/26
+ description C634
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/27
+ description C635
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/28
+ description C636
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/29
+ description C637
+ switchport access vlan 100
+ switchport mode access
+!
+interface GigabitEthernet3/0/30
+ description C638
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/31
+ description C639
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/32
+ description C640
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/33
+ description C642
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/34
+ description C643
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/35
+ description C644
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/36
+ description C646
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/37
+ description C647
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/38
+ description C648
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/39
+ description C650
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/40
+ description C651
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/41
+ description C652
+ switchport access vlan 200
+ switchport mode access
+!
+interface GigabitEthernet3/0/42
+!
+interface GigabitEthernet3/0/43
+ description DHCP_192.168.8.X_GAIA
+ switchport access vlan 88
+ switchport mode access
+!
+interface GigabitEthernet3/0/44
+ description DHCP_172.19.100.X
+ switchport access vlan 100
+ switchport mode access
+!
+interface GigabitEthernet3/0/45
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet3/0/46
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet3/0/47
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet3/0/48
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet3/1/1
+!
+interface GigabitEthernet3/1/2
+!
+interface GigabitEthernet3/1/3
+!
+interface GigabitEthernet3/1/4
+!
+interface TenGigabitEthernet3/1/1
+!
+interface TenGigabitEthernet3/1/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan169
+ ip address 192.168.169.252 255.255.255.0
+ no ip proxy-arp
+!
+!
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+logging esm config
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line vty 0 4
+ timeout login response 300
+ password 7 105D0C0B06181F06
+ login
+line vty 5 15
+ timeout login response 300
+ password 7 03175E1905002C41
+ login
+!
+end
